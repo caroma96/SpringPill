@@ -147,3 +147,12 @@ Inyección de dependencias III
 	después, en la clase que tiene el método main que es UsoEmpleados, debemos cambiar la interfaz por el nombre de la clase real, pues esto limita 
 		el acceso a los métodos. 
 	Se prueba también creando un segundo secretario y adicionando los atributos a las clase DirectorEmpleado para probar funconalidad
+
+Video 12
+Realizar una inyección de campos desde un archivo externo 
+Inyección de campos	
+	Desde archivo de propiedades
+	Se crea un archivo que llamamos   datosEmpresa.propiedades	y en esta definimos los valores para las propiedades que queremos 
+	Posteriormente en el xml de configuración se introduce <context:property-placeholder location="classpath:datosEmpresa.propiedades"/>
+		y se cambian los nombres de los values dentro de las etiquetas por ${nombre_de_la_propiedad_del_archivo_externo}
+	Lo demás debe funcionar igual

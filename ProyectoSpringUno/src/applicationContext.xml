@@ -9,6 +9,8 @@
     http://www.springframework.org/schema/context/spring-context-3.1.xsd
 ">
 
+<!-- Video 12 -->
+<context:property-placeholder location="classpath:datosEmpresa.propiedades"/>
 
 <!-- Creacion de la dependencia Informe, video 9 -->
 <bean id="miInforme" class="es.pildoras.IoC.Informe">
@@ -18,9 +20,13 @@
 	also video 9 DI with constructor -->
 <bean id="miEmpleado" class="es.pildoras.IoC.DirectorEmpleado">
 	<constructor-arg ref="miInforme"></constructor-arg>
-	<!-- video 11 -->
+	<!-- video 11 
 	<property name="email" value="directores@loquesea.com.co"></property>
-	<property name="nombreEmpresa" value="Lo que sea SAS"></property>
+	<property name="nombreEmpresa" value="Lo que sea SAS"></property>-->
+	<!-- Video 12 -->
+	<property name="email" value="${email}"></property>
+	<property name="nombreEmpresa" value="${nombreEmpresa}"></property>
+	
 
 </bean>
 
