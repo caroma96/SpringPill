@@ -14,11 +14,16 @@
 <bean id="miInforme" class="es.pildoras.IoC.Informe">
 </bean>
 
-<!-- Inversion of Control, video 8 -->
+<!-- Inversion of Control, video 8
+	also video 9 DI with constructor -->
 <bean id="miEmpleado" class="es.pildoras.IoC.DirectorEmpleado">
 	<constructor-arg ref="miInforme"></constructor-arg>
 
 </bean>
 
+<!-- Video 10 - DI with setter -->
+<bean id="miSecretarioEmpleado" class="es.pildoras.IoC.SecretarioEmpleado">
+	<property name="informeNuevo" ref="miInforme"></property>
+</bean>
 
 </beans>

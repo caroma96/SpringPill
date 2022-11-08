@@ -124,4 +124,16 @@ Formas para crear D.I.
 		Y al hacer lo mismo en la clase JefeEmpleado, solo es necesario cambiar el nombre de la ruta a la de la clase JefeEmpleado, y funciona de una.
 2. Mediante un setter  | No se explica en este video 
 
-
+Video 10
+Inyección de dependencias II
+En este se realizará la D.I. mediante un setter 
+Pasos:
+	1.	Crear la clase e interfaz de la dependencia (Informe)
+			Ya creada del video 9
+	2.	Creación de método setter en la clase (que va a recibir la inyección) para la inyección 
+			DirectorEmpleado y JefeEmpleado ya fueron implementados con el métedo de constructor, así que aquí se hace con SecretarioEmpleado
+			Lo que se hace es crear el atributo informeNuevo, y a este se le crea únicamente el médoto setter que se llamará setInformeNuevo, se tiene 
+				cuidado con el nombre del método, pues esto sirve en el xml de configuración
+	3.	Configurar la inyección de dependencia en archivo XML (applicationContext.xml)
+			La diferencia respecto al constructor es que aquí la etiquera interna del bean es de tipo property y el nombre es el nombre del método setter
+				con una modificación, se le quita el set y la primera letra va en minúscula (es como si fuera realmente el nombre del atributo)
