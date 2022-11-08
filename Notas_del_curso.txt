@@ -1,0 +1,127 @@
+Curso Spring - Pildoritas 
+Video 3
+* Ventajas de Spring 
+	-	inyección de dependencia (favorece el "loose coupling")
+	-	Desarrollo sencillo con POJOs (Plain Old Java Object)
+	-	Minimiza el código repetitivo (boilerplate code)
+	-	Simplifica el acceso a datos 
+	-	Programación orientada a Aspectos (AOP) -> modularización a alto nivel para asignación clara de tareas
+* Estructura del Core (núcleo) de Spring
+	Screenshot 1
+	Core
+		Contenedor Central => Creación de beans, lectura de archivos config, propiedades y dependencias
+			Beans
+			SpEL => -spring expression Language 
+			Context
+			Core
+		Infraestructura => transacción, logeo, etc 
+			AOP
+			Messaging 
+			Aspects 
+			Instrumentation
+		Acceso a Datos
+			Transactions => OXM y JMS
+			JDBC
+			ORM
+		Web / MVC
+			Porlet 
+			Servlet
+			WebSocket
+			Web
+		Pruebas
+			Unit 
+			Mock
+			Integration
+
+Video 4
+*	Requisitos necesarios 
+		JRE superiora la versión 8
+		JDK (Java Development Kit)
+		Servidor Java
+			- usaremos Tomcat
+		IDE (Entorno de Desarrollo Integrado)
+			- usaremos Eclipse
+*	Preparación entorno desarrollo 
+Spring.io
+Pagina para revisar de spring 
+
+Video 5
+*	Descargar de Spring JAR Files 
+*	Importación de librerías a proyecto en Eclipse
+Descargar los jar de 
+https://repo.spring.io/ui/native/release/org/springframework/spring/
+entrar y elegir el dist.zip 
+Descomprimirlo, en mi caso fue en una carpeta que creé en C
+Después en el IDE, en: window -> perspective -> open perspective -> java   : después de esto, ya tendremos la perspectiva de Java en eclipse
+Se crea una carpeta llamada libs, en esta se copian y pegan todas las librerías que están en la carpeta libs dentro del archivo descomprimido 
+previamente 
+Después vamos al proyecto: clic derecho -> properties -> Java Built Path -> libraries (pestaña) -> seleccionar classpath -> Add JARs -> los buscamos
+dentro de la carpeta libs del proyecto, seleccionamos todos -> apply and close
+
+Video 6: 
+spring : Inversion of control 
+Esta es una de las principales características 
+Principio de Hollywood (Martin Fowler)
+Inversión de Control 
+Invierte el flujo de control del programa, externalizando (agente externo: framework) la construcción y manejo de objetos
+Ejemplo: un programa secuencial (aplicación consola) vs una aplicación gráfica, en el primero el flujo es del programa, en el segundo 
+			el control lo tienen los eventos de la aplicación gráfica.
+Ventajas 
+	Proporciona modularidad 
+	Permite ampliar la funcionalidad de nuestras aplicaciones sin modificar las clases 
+	evita la dependencia entre las clases 
+	Flexibiliza nuestras aplicaciones haciéndolas más configurables
+Un ejemplo de esto es que desde una clase se le puede pedir al framework spring que me devuelva un empleado, y este puede devolverle varios tipos de 
+empleado, sin la necesida de modificar mucho código. 
+Para eso se usa el archivo de configuración, hay varias formas de hacerlo.
+
+video 7 
+Inversion of control II
+Se busca que se le pide a Spring que me pase un tipo de empleado y Spring lo hace sin la necesidad de hacer tanta clase 
+Aquí se busca que los varios empleados que se van a usar cumplan con las buenas prácticas. Eso es crear una clase padre o una interface 
+La estructua -> toma el proyecto creado previamente que se llamo ProyectoSpringUno
+				-> Crea un paquete es.pildoras-IoC
+				-> Va creando las clases necesarias: JefeEmpleado, UsoEmpleados (main), Empleados (Interface), Secretario y Director y así
+el problema que da la forma de hacer lo anterior es que toca modificar código, crear, agregar o modificar clases y así, spring y sus beans con
+su object factory ayudan a corregir este error
+
+Video 8
+Estructura de flujo
+UsoEmplados.java -----------------> Spring
+										config
+								Jefe 	Director 	Secretario
+Para que el proceso funcione es necesario la creación del config, se hace en estos momentos con un XML
+Desde el paquete source se crear un xml con el nombre applicationContext.xml y allí se copia y pega el contendio del curso en el video
+Se crea el bean que apunta a la clase JedeEmpleado
+Una vez se carga eso, se procede a seguir los pasos que quedan en la clase y que corresponde al video 8
+Así para cambiar el comportamiento del programa, simplemente se modifica el atributo class="es.pildoras.IoC.DirectorEmpleado" dentro del bean, apuntando
+a la dirección del tipo de empleado que se necesite, a por ejemplo class="es.pildoras.IoC.JefeEmpleado", esto altera el resultado de la ejecución 
+y no modificamos nada de código, si no solo el archivo de configuración 
+
+Video 9 
+Inyección de Dependencias - Dependnecy Injection D.I.
+Concepto: para entender dependencias, hay que entender Modularización -> diferentes clases o partes independientes que se comunican para funcionar como 
+			una unidad. Todos los objetos necesitan de otros para funcionar correctamente. Así necesitan, dependen de... para funcionar correctamente
+		Básicamente, es delegar a un tercera la labor de crear los objetos, y así no instanciarlos en la misma clase que se usan. En este caso, se le pide 
+		a Spring, el framework, que inyecte objetos y/o dependencias dentro de una clase para que funcione correctamente
+Se le busca otra funcionalidad a los empleados, que es la de hacer informes, pero como informe es complejo, será una clase que se le inyectará a cada uno 
+de los empleados. Pero la clase informe, no se inicializa en las clases de los empleados, sino, se les hará el proceso de inyección.
+Formas para crear D.I.
+1. Mediante un constructor 
+		1. Crear la clase e interfaz de la dependencia (Informes) 
+				Crea la interface CreacionInforme y luego la clase Informe, en donde implementa la interface.
+					Adicionalmente, le agrega el método a la interface Empleados, lo que obliga a utilizarlos también en cada uno de los empleados
+		2. Creación de constructor en la clase para la inyección de la dependencia 
+				Crea un atributo con el tipo de la interface en la clase DirectorEmpleado (puede ser cualquiera)
+				Crea el constructor que recibe como parámetro un objeto de tipo interface CreacionInforme y se lo asigna al atributo de la clase del mismo tipo
+					y de esa manera ocurre la inyección de dependencia
+				Con la anterior dependencia inyectada, se procede a utlizarla en el método que se implementa de la interface Empleados. getInforme
+		3. Configurar la inyección de dependencia en archivo XML (applicationContext.xml)
+				Vamos al archivo de configuración y creamos un bean con el id miInforme y la clase de Informe como ruta
+				Dentro del bean con id miEmpleado que se creó en IoC (V.9), es introducido <constructor-arg ref="miInforme"></constructor-arg>
+					inyectando así la dependencia dentro del Bean.
+		Después de esto, se utiliza el método dentro del objeto Empleado y se imprime. No hubo la necesidad de darle un solo new en todo el código
+		Y al hacer lo mismo en la clase JefeEmpleado, solo es necesario cambiar el nombre de la ruta a la de la clase JefeEmpleado, y funciona de una.
+2. Mediante un setter  | No se explica en este video 
+
+
