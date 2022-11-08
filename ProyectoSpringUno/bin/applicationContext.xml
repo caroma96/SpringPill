@@ -18,12 +18,17 @@
 	also video 9 DI with constructor -->
 <bean id="miEmpleado" class="es.pildoras.IoC.DirectorEmpleado">
 	<constructor-arg ref="miInforme"></constructor-arg>
+	<!-- video 11 -->
+	<property name="email" value="directores@loquesea.com.co"></property>
+	<property name="nombreEmpresa" value="Lo que sea SAS"></property>
 
 </bean>
 
 <!-- Video 10 - DI with setter -->
 <bean id="miSecretarioEmpleado" class="es.pildoras.IoC.SecretarioEmpleado">
 	<property name="informeNuevo" ref="miInforme"></property>
+	<property name="email" value="secretaria@loquesea.com.co"></property>
+	<property name="nombreEmpresa" value="Lo que sea SAS"></property>
 </bean>
 
 </beans>

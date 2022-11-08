@@ -137,3 +137,13 @@ Pasos:
 	3.	Configurar la inyección de dependencia en archivo XML (applicationContext.xml)
 			La diferencia respecto al constructor es que aquí la etiquera interna del bean es de tipo property y el nombre es el nombre del método setter
 				con una modificación, se le quita el set y la primera letra va en minúscula (es como si fuera realmente el nombre del atributo)
+
+Video 11
+Inyección de dependencias III
+-	Inyección de Campos 
+	Se crean nuevos campos, dos para el caso email y nombreEmpresa
+	Se crean los métodos setter y getters de ambos, pero a spring le van a importar los setters 
+	Se crea los campos dentro del bean en el xml, lo importante es el atributo value, el cual fija el valor que el bean le da
+	después, en la clase que tiene el método main que es UsoEmpleados, debemos cambiar la interfaz por el nombre de la clase real, pues esto limita 
+		el acceso a los métodos. 
+	Se prueba también creando un segundo secretario y adicionando los atributos a las clase DirectorEmpleado para probar funconalidad

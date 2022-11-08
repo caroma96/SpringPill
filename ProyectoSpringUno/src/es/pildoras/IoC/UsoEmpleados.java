@@ -32,12 +32,29 @@ public class UsoEmpleados {
 		
 		System.out.println(Juan.getInformes()); // V.9 DI 
 		*/
-		Empleados Maria = contexto.getBean("miSecretarioEmpleado", Empleados.class);
+		
+		// Video 11
+		SecretarioEmpleado Maria = contexto.getBean("miSecretarioEmpleado", SecretarioEmpleado.class);
+		SecretarioEmpleado Pablo = contexto.getBean("miSecretarioEmpleado", SecretarioEmpleado.class);
 		
 		System.out.println(Maria.getTareas()); 
 		
 		System.out.println(Maria.getInformes());
+		System.out.println("Email: " + Maria.getEmail());
+		System.out.println("Nombre de la empresa: " + Maria.getNombreEmpresa());
+		System.out.println("Email Pablo" + Pablo.getEmail());
+		
+		
+		DirectorEmpleado juan = contexto.getBean("miEmpleado", DirectorEmpleado.class);
+		
+		System.out.println(juan.getTareas()); 
+		System.out.println(juan.getInformes());
+		System.out.println("Email: " + juan.getEmail());
+		System.out.println(juan.getNombreEmpresa());
+		
+		
 		contexto.close(); // 4
+		
 	}
 
 }
